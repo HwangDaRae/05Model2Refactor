@@ -154,7 +154,7 @@ function fncGetSortList(priceSort) {
 		</c:forEach>
 	</c:if>
 	<!-- 회원, 비회원 -->
-	<c:if test="${ sessionScope.user.role == 'user' || empty sessionScope.user }">
+	<c:if test="${ sessionScope.user.role != 'admin' }">
 		<c:forEach var="i" begin="0" end="${ size-1 }" step="1">
 			<tr class="ct_list_pop">
 				<td align="center">${ size-i }</td>

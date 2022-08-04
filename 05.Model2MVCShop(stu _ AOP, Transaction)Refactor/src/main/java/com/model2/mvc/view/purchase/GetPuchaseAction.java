@@ -18,11 +18,12 @@ public class GetPuchaseAction extends Action {
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("[GetPuchaseAction execute() start...]");
 		
+		// 회원 상세주문조회
 		int tranNo = Integer.parseInt(request.getParameter("tranNo"));
 		System.out.println("tranNo : " + tranNo);
-		
+
 		PurchaseService service = new PurchaseServiceImpl();
-		Purchase purchaseVO = service.getPurchase(tranNo);
+		Purchase purchaseVO = service.getPurchase(tranNo);		
 		System.out.println("getPurchase.jsp : " + purchaseVO);
 		
 		request.setAttribute("purchaseVO", purchaseVO);

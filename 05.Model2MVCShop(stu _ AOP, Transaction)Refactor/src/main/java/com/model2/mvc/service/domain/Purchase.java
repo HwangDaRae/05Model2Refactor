@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Purchase {
 
 	private int tranNo;
+	private String tranId;
 	private Product purchaseProd;
 	private User buyer;
 	private String paymentOption;
@@ -16,26 +17,9 @@ public class Purchase {
 	private Date orderDate;
 	private String divyDate;
 	private int amount;
+	private int totalPrice;
 
 	public Purchase() {
-	}
-
-	public Purchase(int tranNo, Product purchaseProd, User buyer, String paymentOption, String receiverName,
-			String receiverPhone, String divyAddr, String divyRequest, String tranCode, Date orderDate, String divyDate,
-			int amount) {
-		super();
-		this.tranNo = tranNo;
-		this.purchaseProd = purchaseProd;
-		this.buyer = buyer;
-		this.paymentOption = paymentOption;
-		this.receiverName = receiverName;
-		this.receiverPhone = receiverPhone;
-		this.divyAddr = divyAddr;
-		this.divyRequest = divyRequest;
-		this.tranCode = tranCode;
-		this.orderDate = orderDate;
-		this.divyDate = divyDate;
-		this.amount = amount;
 	}
 
 	public int getTranNo() {
@@ -44,6 +28,14 @@ public class Purchase {
 
 	public void setTranNo(int tranNo) {
 		this.tranNo = tranNo;
+	}
+
+	public String getTranId() {
+		return tranId;
+	}
+
+	public void setTranId(String tranId) {
+		this.tranId = tranId;
 	}
 
 	public Product getPurchaseProd() {
@@ -134,12 +126,47 @@ public class Purchase {
 		this.amount = amount;
 	}
 
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
 	@Override
 	public String toString() {
-		return "Purchase [tranNo=" + tranNo + ", amount=" + amount + ", purchaseProd=" + purchaseProd + ", buyer="
-				+ buyer + ", paymentOption=" + paymentOption + ", receiverName=" + receiverName + ", receiverPhone="
-				+ receiverPhone + ", divyAddr=" + divyAddr + ", divyRequest=" + divyRequest + ", tranCode=" + tranCode
-				+ ", orderDate=" + orderDate + ", divyDate=" + divyDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Purchase [tranNo=");
+		builder.append(tranNo);
+		builder.append(", tranId=");
+		builder.append(tranId);
+		builder.append(", purchaseProd=");
+		builder.append(purchaseProd);
+		builder.append(", buyer=");
+		builder.append(buyer);
+		builder.append(", paymentOption=");
+		builder.append(paymentOption);
+		builder.append(", receiverName=");
+		builder.append(receiverName);
+		builder.append(", receiverPhone=");
+		builder.append(receiverPhone);
+		builder.append(", divyAddr=");
+		builder.append(divyAddr);
+		builder.append(", divyRequest=");
+		builder.append(divyRequest);
+		builder.append(", tranCode=");
+		builder.append(tranCode);
+		builder.append(", orderDate=");
+		builder.append(orderDate);
+		builder.append(", divyDate=");
+		builder.append(divyDate);
+		builder.append(", amount=");
+		builder.append(amount);
+		builder.append(", totalPrice=");
+		builder.append(totalPrice);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

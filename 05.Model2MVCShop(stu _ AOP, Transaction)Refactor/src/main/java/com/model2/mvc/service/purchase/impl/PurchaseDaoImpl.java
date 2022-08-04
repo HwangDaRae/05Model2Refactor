@@ -70,4 +70,10 @@ public class PurchaseDaoImpl implements PurchaseDao {
 		sqlSession.update("PurchaseMapper.updateTranCode", purchaseVO);
 	}
 
+	@Override
+	public List<Purchase> getListPurchase(String tranId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

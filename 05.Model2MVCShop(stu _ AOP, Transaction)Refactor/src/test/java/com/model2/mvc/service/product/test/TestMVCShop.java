@@ -1,6 +1,5 @@
 package com.model2.mvc.service.product.test;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +22,7 @@ import com.model2.mvc.service.purchase.PurchaseService;
 import com.model2.mvc.service.user.UserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:config/commonservice.xml" })
+@ContextConfiguration(locations = { "classpath:config/context-aspect.xml", "classpath:config/context-common.xml", "classpath:config/context-mybatis.xml", "classpath:config/context-transaction.xml" })
 public class TestMVCShop {
 	
 	@Autowired
@@ -47,7 +46,7 @@ public class TestMVCShop {
 		System.out.println("\n===================================");
 		User user = new User("userIdTest01", "userNameTest01", "password", null, null, null, null, null, null);
 		Search search = new Search(2, null, null, 3);
-		
+				
 		System.out.println(":: 1 : User 회원가입");
 		//userService.addUser(user);
 
@@ -65,21 +64,21 @@ public class TestMVCShop {
 
 		User vo = new User("userIdTest01", "userNameUpdate", "passwordUpdate", null, null, null, null, null, null);
 		System.out.println(":: 5 : User 정보 수정");
-		userService.updateUser(vo);
+		//userService.updateUser(vo);
 		System.out.println("===================================\n");
 	}
 	
-	// @Test
+	@Test
 	public void testProduct() throws Exception {
 		System.out.println("\n===================================");
 		Product product = new Product(0, "풍경", "상세풍경", "2022-07-30", 461000, "/images/uploadFiles/test2.jpg", null, 27);
 		Search search = new Search(2, null, null, 3, null);
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		// System.out.println("상품등록 : " + productService.addProduct(product));
-		// System.out.println("상품번호로 상품 하나 찾기 : " + productService.getProduct(10038));
-		// System.out.println("총 상품 개수 가져오기 : " +
-		// productService.getProductTotalCount(search));
+		//System.out.println("상품등록 : " + productService.addProduct(product));
+		System.out.println("상품번호로 상품 하나 찾기 : " + productService.getProduct(10001));
+		System.out.println("총 상품 개수 가져오기 : " + productService.getProductTotalCount(search));
+		/*
 		System.out.println("상품 전체 가져오기 : ");
 		map = productService.getProductList(search);
 		List<Product> list = new ArrayList<Product>();
@@ -87,15 +86,14 @@ public class TestMVCShop {
 		for (int i = 0; i < list.size(); i++) {
 			System.out.println(list.get(i).toString());
 		}
-
-		Product productUpdate = new Product(10038, "풍경update", "상세풍경update", "2022-07-30", 461000,
-				"/images/uploadFiles/test2.jpg", null, 27);
+		*/
+		//Product productUpdate = new Product(10038, "풍경update", "상세풍경update", "2022-07-30", 461000, "/images/uploadFiles/test2.jpg", null, 27);
 		// System.out.println("상품 정보 수정 : " +
 		// productService.updateProduct(productUpdate));
 		System.out.println("===================================\n");
 	}
 
-	@Test
+	//@Test
 	public void testPurchase() throws Exception {
 		System.out.println("\n===================================");
 		User user = new User("user02", "SCOTT", "2222", "user", null, null, null, null, null);		

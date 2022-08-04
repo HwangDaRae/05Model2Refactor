@@ -22,7 +22,7 @@ public class LoginAction extends Action{
 		UserService userService=new UserServiceImpl();
 		User dbUser=userService.loginUser(user);
 		
-		HttpSession session=request.getSession();
+		HttpSession session=request.getSession(true);
 		session.setAttribute("user", dbUser);
 		
 		return "redirect:/index.jsp";

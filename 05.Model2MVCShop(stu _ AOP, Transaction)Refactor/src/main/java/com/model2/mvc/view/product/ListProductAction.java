@@ -4,13 +4,17 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.common.util.CommonUtil;
 import com.model2.mvc.framework.Action;
+import com.model2.mvc.service.domain.User;
 import com.model2.mvc.service.product.ProductService;
 import com.model2.mvc.service.product.impl.ProductServiceImpl;
+import com.model2.mvc.service.user.UserService;
+import com.model2.mvc.service.user.impl.UserServiceImpl;
 
 public class ListProductAction extends Action {
 
@@ -21,6 +25,15 @@ public class ListProductAction extends Action {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("[ListProductAction execute() start...]");
+		
+		// 비회원인지 회원인지 구분
+		if((User)request.getSession(true).getAttribute("user") == null) {
+			User user = new User();
+			user.setUserId("non-member");
+			request.getSession(true).setAttribute("user", user);
+		}
+		System.out.println("user_id : " + ( (User)request.getSession(true).getAttribute("user") ).getUserId());
+		
 		// admin 계정일때 판매상품관리와 상품검색을 구분해서 상품정보를 수정할지 조회할지 구분
 		String menu = request.getParameter("menu");
 

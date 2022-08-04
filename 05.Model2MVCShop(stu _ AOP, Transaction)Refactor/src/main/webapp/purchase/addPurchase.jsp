@@ -27,13 +27,18 @@
 </c:forEach>
 <table border=1>
 	<tr>
-		<td>물품번호</td>
-		<td>${ list[0].purchaseProd.prodNo }<%-- ${ purchaseVO.purchaseProd.prodNo } --%></td>
+		<td>주문번호를 꼭 기억하세요</td>
+		<td>${ list[0].tranId }<%-- ${ purchaseVO.purchaseProd.prodNo } --%></td>
 		<td></td>
 	</tr>
 	<tr>
 		<td>구매자아이디</td>
+		<c:if test="${ list[0].buyer.userId == 'non-member' }">
+		<td>비회원<%-- ${ purchaseVO.buyer.userId } --%></td>
+		</c:if>
+		<c:if test="${ list[0].buyer.userId != 'non-member' }">
 		<td>${ list[0].buyer.userId }<%-- ${ purchaseVO.buyer.userId } --%></td>
+		</c:if>
 		<td></td>
 	</tr>
 	<tr>

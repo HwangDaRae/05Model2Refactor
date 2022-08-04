@@ -30,41 +30,21 @@
   		<result property="amount" 		column="amount" 			jdbcType="NUMERIC"/>
   	</resultMap>
   	
-	<!-- INSERT INTO product VALUES (seq_product_prod_no.NEXTVAL,?,?,TO_CHAR(TO_DATE(?),'yyyymmdd'),?,?,sysdate,?) -->
+  	
+  	
 	<insert id="addProduct" parameterType="com.model2.mvc.service.domain.Product">
 		INSERT INTO product(prod_no, prod_name, prod_detail, manufacture_day, price, image_file, reg_date, amount)
 		VALUES (seq_product_prod_no.NEXTVAL,#{prodName:VARCHAR},#{prodDetail:VARCHAR},TO_CHAR(TO_DATE(#{manuDate:VARCHAR}),'yyyymmdd'),#{price:NUMERIC},#{fileName:VARCHAR},sysdate,#{amount:NUMERIC})
 	</insert>	
 	
-	<!-- SELECT p.*, t.tran_status_code tsc FROM product p, transaction t WHERE p.prod_no=t.prod_no(+) AND p.prod_no=? -->
-	<select id="findProduct" parameterType="com.model2.mvc.service.domain.Product" resultMap="productSelectMap">
-		SELECT p.*, t.tran_status_code tsc FROM product p, transaction t WHERE p.prod_no=t.prod_no(+) AND p.prod_no=#{prodNo}
+	
+	
+	<select id="findProduct" parameterType="int" resultMap="productSelectMap">
+		SELECT p.*, t.tran_status_code tsc FROM product p, transaction t WHERE p.prod_no=t.prod_no(+) AND p.prod_no=#{value}
 	</select>
 	
 	
 	
-	<!-- totalCount
-	SELECT COUNT(*) FROM (
-		select vt.* "
-				+ " from ( select ROW_NUMBER() OVER(PARTITION BY p.prod_no ORDER BY t.order_data desc) as r "
-				+ " , p.amount, p.prod_no, p.prod_name, p.price, p.reg_date, nvl(tran_status_code, 0) as tcode "
-				+ "	from transaction t, product p "
-				+ "	where t.prod_no(+)=p.prod_no ) vt "
-				+ " where r = 1 ";
-		if(searchVO.getSearchCondition() != null && !searchVO.getSearchKeyword().trim().equals("")) {
-			if(searchVO.getSearchCondition().equals("0")) {
-				sql += " AND p.PROD_NO=" + searchVO.getSearchKeyword();
-			}else if(searchVO.getSearchCondition().equals("1")) {
-				sql += " AND UPPER(p.PROD_NAME) LIKE UPPER('%" + searchVO.getSearchKeyword() + "%') ";
-			}else if(searchVO.getSearchCondition().equals("2")) {
-				sql += " AND p.PRICE=" + searchVO.getSearchKeyword();
-			}
-		}
-		System.out.println("ProductDAO Original sql : " + sql);
-		
-		if(searchVO.getPriceSort() != null && !searchVO.getPriceSort().equals("")) {
-			sql += " ORDER BY price " + searchVO.getPriceSort() 
-		) -->
 	<select id="totalCountProduct" parameterType="com.model2.mvc.common.Search" resultType="java.lang.Integer">
 		SELECT COUNT(*)
 		FROM ( SELECT vt.*
@@ -93,38 +73,8 @@
 			ORDER BY price #{priceSort}
 		</if> -->
 	</select>
+	
 		
-	<!-- SELECT * "
-	+ "	FROM ( SELECT ROWNUM AS row_n, vt1.* "
-	+ 		 " FROM (
-	
-	
-	
-	select vt.* "
-			+ " from ( select ROW_NUMBER() OVER(PARTITION BY p.prod_no ORDER BY t.order_data desc) as r "
-			+ " , p.amount, p.prod_no, p.prod_name, p.price, p.reg_date, nvl(tran_status_code, 0) as tcode "
-			+ "	from transaction t, product p "
-			+ "	where t.prod_no(+)=p.prod_no ) vt "
-			+ " where r = 1 ";
-	if(searchVO.getSearchCondition() != null && !searchVO.getSearchKeyword().trim().equals("")) {
-		if(searchVO.getSearchCondition().equals("0")) {
-			sql += " AND p.PROD_NO=" + searchVO.getSearchKeyword();
-		}else if(searchVO.getSearchCondition().equals("1")) {
-			sql += " AND UPPER(p.PROD_NAME) LIKE UPPER('%" + searchVO.getSearchKeyword() + "%') ";
-		}else if(searchVO.getSearchCondition().equals("2")) {
-			sql += " AND p.PRICE=" + searchVO.getSearchKeyword();
-		}
-	}
-	System.out.println("ProductDAO Original sql : " + sql);
-	
-	if(searchVO.getPriceSort() != null && !searchVO.getPriceSort().equals("")) {
-		sql += " ORDER BY price " + searchVO.getPriceSort()
-	
-	
-	
-	) vt1 ) vt2 "
-	+ " WHERE row_n BETWEEN "+((search.getCurruntPage()-1)*search.getPageSize()+1)+" 
-	AND "+search.getCurruntPage()*search.getPageSize() -->
 	
 	<select id="allProduct" parameterType="com.model2.mvc.common.Search" resultMap="productSelectMap">
 	SELECT *
@@ -158,7 +108,6 @@
 		
 		
 		
-	<!-- UPDATE PRODUCT set PROD_DETAIL=?,MANUFACTURE_DAY=TO_CHAR(TO_DATE(?),'YYYYMMDD'),PRICE=?,AMOUNT=? where PROD_NO=? -->
 	<update id="updateProduct" parameterType="com.model2.mvc.service.domain.Product">
 		UPDATE PRODUCT set PROD_DETAIL=#{prodDetail}, MANUFACTURE_DAY=TO_CHAR(TO_DATE(#{manuDate}),'YYYYMMDD'), PRICE=#{price}, AMOUNT=#{amount} where PROD_NO=#{prodNo}
 	</update>

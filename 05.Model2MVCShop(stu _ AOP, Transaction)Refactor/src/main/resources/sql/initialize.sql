@@ -47,7 +47,7 @@ CREATE TABLE product (
 
 CREATE TABLE transaction ( 
 	tran_no 				NUMBER 			NOT NULL,
-	tran_id					NUMBER			NOT NULL,
+	tran_id					VARCHAR2(50)	NOT NULL,
 	prod_no 				NUMBER(16)		NOT NULL REFERENCES product(prod_no),
 	buyer_id 				VARCHAR2(20)	NOT NULL REFERENCES users(user_id),
 	payment_option		CHAR(3),
@@ -59,6 +59,7 @@ CREATE TABLE transaction (
 	order_data 			DATE,
 	dlvy_date 			DATE,
 	amount				NUMBER(10),
+	total_price			NUMBER(20),
 	PRIMARY KEY(tran_no)
 );
 
@@ -80,7 +81,11 @@ VALUES ( 'admin', 'admin', '1234', 'admin', NULL, NULL, '서울시 서초구', 'admin@
 
 INSERT 
 INTO users ( user_id, user_name, password, role, ssn, cell_phone, addr, email, reg_date ) 
-VALUES ( 'manager', 'manager', '1234', 'admin', NULL, NULL, NULL, 'manager@mvc.com', to_date('2012/01/14 10:48:43', 'YYYY/MM/DD HH24:MI:SS'));          
+VALUES ( 'manager', 'manager', '1234', 'admin', NULL, NULL, NULL, 'manager@mvc.com', to_date('2012/01/14 10:48:43', 'YYYY/MM/DD HH24:MI:SS'));     
+
+INSERT 
+INTO users ( user_id, user_name, password, role, ssn, cell_phone, addr, email, reg_date ) 
+VALUES ( 'non-member', 'non-member', 'non-member', 'non', NULL, NULL, NULL, 'manager@mvc.com', to_date('2012/01/14 10:48:43', 'YYYY/MM/DD HH24:MI:SS'));        
 
 INSERT INTO users 
 VALUES ( 'user01', 'SCOTT', '1111', 'user', NULL, NULL, NULL, NULL, sysdate); 
