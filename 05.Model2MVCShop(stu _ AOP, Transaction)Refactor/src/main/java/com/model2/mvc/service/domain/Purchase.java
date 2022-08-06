@@ -22,6 +22,44 @@ public class Purchase {
 	public Purchase() {
 	}
 
+	public Purchase(int tranNo, Product purchaseProd, User buyer, String paymentOption, String receiverName,
+			String receiverPhone, String divyAddr, String divyRequest, String tranCode, Date orderDate, String divyDate,
+			int amount) {
+		super();
+		this.tranNo = tranNo;
+		this.purchaseProd = purchaseProd;
+		this.buyer = buyer;
+		this.paymentOption = paymentOption;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.divyAddr = divyAddr;
+		this.divyRequest = divyRequest;
+		this.tranCode = tranCode;
+		this.orderDate = orderDate;
+		this.divyDate = divyDate;
+		this.amount = amount;
+	}
+
+	public Purchase(int tranNo, String tranId, Product purchaseProd, User buyer, String paymentOption,
+			String receiverName, String receiverPhone, String divyAddr, String divyRequest, String tranCode,
+			Date orderDate, String divyDate, int amount, int totalPrice) {
+		super();
+		this.tranNo = tranNo;
+		this.tranId = tranId;
+		this.purchaseProd = purchaseProd;
+		this.buyer = buyer;
+		this.paymentOption = paymentOption;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.divyAddr = divyAddr;
+		this.divyRequest = divyRequest;
+		this.tranCode = tranCode;
+		this.orderDate = orderDate;
+		this.divyDate = divyDate;
+		this.amount = amount;
+		this.totalPrice = totalPrice;
+	}
+
 	public int getTranNo() {
 		return tranNo;
 	}

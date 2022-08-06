@@ -1,5 +1,6 @@
 package com.model2.mvc.service.product.test;
 
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -93,6 +94,22 @@ public class TestMVCShop {
 		System.out.println("===================================\n");
 	}
 
+	/*
+		private int tranNo;
+		private String tranId;
+		private Product purchaseProd;
+		private User buyer;
+		private String paymentOption;
+		private String receiverName;
+		private String receiverPhone;
+		private String divyAddr;
+		private String divyRequest;
+		private String tranCode;
+		private Date orderDate;
+		private String divyDate;
+		private int amount;
+		private int totalPrice;
+	*/
 	//@Test
 	public void testPurchase() throws Exception {
 		System.out.println("\n===================================");
@@ -101,8 +118,7 @@ public class TestMVCShop {
 				"/images/uploadFiles/test2.jpg", null, 27);
 		//Product product = new Product(10038, "풍경update", "상세풍경update", "2022-07-30", 461000,
 		//				"/images/uploadFiles/test2.jpg", null, 0);
-		Purchase purchase = new Purchase(0, product, user, 
-				"2", "받는사람이름", "연락처", "배송주소", "배송요구사항", "0", null, "2022-07-30", 3);
+		Purchase purchase = new Purchase(0, product, user, "2", "받는사람이름", "연락처", "배송주소", "배송요구사항", "0", null, "2022-07-30", 3);
 		//System.out.println("1 상품구매 : " + (purchaseService.addPurchase(purchase, product)).toString());
 		
 		System.out.println("2 구매번호로 구매상세정보보기 : " + purchaseService.getPurchase(10043));
@@ -115,14 +131,12 @@ public class TestMVCShop {
 		List<Purchase> purList = purchaseService.getPurchaseList(search, user.getUserId());
 		//
 		
-		purchase = new Purchase(10043, product, user, 
-						"2", "이름update", "연락처", "배송주소", "배송요구사항", "0", null, "2022-07-30", 3);
+		purchase = new Purchase(10043, product, user, "2", "이름update", "연락처", "배송주소", "배송요구사항", "0", null, "2022-07-30", 3);
 		//System.out.println("5 구매정보변경 : " + purchaseService.updatePurchase(purchase));
 		
 		Product product2 = new Product(10038, "풍경update", "상세풍경update", "2022-07-30", 461000,
 								"/images/uploadFiles/test2.jpg", null, 0);
-		Purchase purchase2 = new Purchase(0, product2, user, 
-						"2", "받는사람이름", "연락처", "배송주소", "배송요구사항", "0", null, "2022-07-30", 3);
+		Purchase purchase2 = new Purchase(0, product2, user, "2", "받는사람이름", "연락처", "배송주소", "배송요구사항", "0", null, "2022-07-30", 3);
 		System.out.println("6 상태코드수정 : ");
 		//purchaseService.updateTranCode(purchase2);
 		
