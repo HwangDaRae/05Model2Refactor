@@ -1,7 +1,5 @@
 package com.model2.mvc.service.product.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +47,7 @@ public class ProductDaoImpl implements ProductDao {
 
 	@Override
 	public Map<String, Object> getProductList(Search searchVO) throws Exception {
+		System.out.println("여기까지 오나?");
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Product> list = (List)sqlSession.selectList("ProductMapper.allProduct", searchVO);
 		map.put("list", list);
